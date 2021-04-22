@@ -1,0 +1,14 @@
+[debug] [watch] [scicalc / Test / testQuick] Found inputs: C:\Users\12893\Downloads\SciCalc\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\main\java\**\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\main\resources\**\*,C:\Users\12893\Downloads\SciCalc\src\main\scala\**\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\main\scala-2.12\**\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\test\java\**\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\test\resources\**\*,C:\Users\12893\Downloads\SciCalc\src\test\scala\**\*.{java,scala},C:\Users\12893\Downloads\SciCalc\src\test\scala-2.12\**\*.{java,scala}
+[info] 1. Monitoring source files for scicalc/testQuick...
+[info]    Press <enter> to interrupt or '?' for more options.
+[debug] [watch] [debug] Received input event: ShowOptions.
+[debug] [watch] [debug] Received input event: ShowOptions.
+[info] Options:
+[info]   <ctrl-d> : interrupt (exits sbt in batch mode)
+[info]   <enter>  : interrupt (exits sbt in batch mode)
+[info]   '?'      : print options
+[info]   'q'      : quit sbt
+[info]   'r'      : re-run the command
+[info]   's'      : return to shell
+[debug] [watch] [debug] Received input event: Run().
+[debug] [watch] [debug] Received input event: Run().
