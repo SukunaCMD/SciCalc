@@ -46,4 +46,6 @@ object Main {
     unitTestInnerExprs
 
   }
+
+  def doIDoAnything: Unit = ???
 }
