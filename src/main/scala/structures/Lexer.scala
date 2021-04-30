@@ -71,9 +71,10 @@ class Lexer {
       }
       case _ => parens
     }
-    loop("", tokens, false, 0, 0)
+    val finishedP = loop("", tokens, false, 0, 0)
+    println(finishedP)
+    finishedP
   }
-
 
   def lex2(chars: String): List[Lexed] = {
     val max = chars.size
@@ -151,23 +152,5 @@ class Lexer {
     chars.size
   }
 
-//  def lexFoldTest(chars: String): List[Lexed] = {
-//    chars.foldLeft(List[Lexed]()){ (l: List[Lexed], b: Char) =>
-//      b match {
-//        case cur if cur.isDigit=> {
-//          val lastInt = lastIntIndex(i, chars)
-//          val newString = chars.substring(i, lastInt)
-//          val pair = (newString, Token("number"))
-//          loop(lastInt, l :+ pair)
-//
-//        }
-//        case cur if isOperator(cur)=> {
-//          val pair = (cur.toString, Token(returnOp(cur.toString)))
-//          loop(i + 1, l :+ pair)
-//        }
-//        case _ => List() // user failed to indicate proper sentence structure
-//      }
-//    }
-//  }
 }
 
