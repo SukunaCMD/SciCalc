@@ -1,6 +1,6 @@
 package structures
 
-trait Tree[+A]
+sealed trait Tree[+A]
 case class Leaf[A](value: A) extends Tree[A]
 case class Branch[A](cur: String, left: Tree[A], right: Tree[A]) extends Tree[A]
 case object EmptyTree extends Tree[Nothing]
@@ -23,6 +23,19 @@ object Tree {
   def pPrint[A](t: Tree[A]): String = {
 
     def loop(t: Tree[A], buildUp: String, padding: String, pointer: String): String = t match {
+      case Branch(cur, left, EmptyTree) => {
+        val newBuildUp = buildUp + padding + pointer + cur + "\n"
+        val newPadding = padding + "│  "
+        val newPointer = "├──"
+        loop(left, newBuildUp, newPadding, newPointer)
+      }
+      case Branch(cur, EmptyTree, right) => {
+        val newBuildUp = buildUp + padding + pointer + cur + "\n"
+        val newPadding = padding + "│  "
+        val newPointer = "└──"
+
+        loop(right, newBuildUp, newPadding, newPointer)
+      }
       case Branch(cur, left, right) => {
         println(cur)
         val newBuildUp = buildUp + padding + pointer + cur + "\n"
@@ -32,30 +45,13 @@ object Tree {
 
         newBuildUp + loop(left, buildUp, newPadding, newPointerLeft) + loop(right, buildUp, newPadding, newPointerRight)
       }
-      case Branch(cur, left, EmptyTree) => {
-        println(s"$left run?")
-
-        val newBuildUp = buildUp + padding + pointer + cur + "\n"
-        val newPadding = padding + "│  "
-        val newPointer = "├──"
-
-        loop(left, newBuildUp, newPadding, newPointer)
-      }
-      case Branch(cur, EmptyTree, right) => {
-        println(s" $right right run")
-
-        val newBuildUp = buildUp + padding + pointer + cur + "\n"
-        val newPadding = padding + "│  "
-        val newPointer = "└──"
-
-        loop(right, newBuildUp, newPadding, newPointer)
-      }
-
       case Leaf(cur) => {
         val newBuildUp = buildUp + padding + pointer + cur + "\n"
-//        println()
-       //println(s"${padding+pointer} HELLO \n")
         newBuildUp
+      }
+      case a => {
+
+        ""
       }
     }
     loop(t, "", "", "")
@@ -79,7 +75,7 @@ object Tree {
         pPrint(l, newBuild, padding + "│  ", pointerForLeft)
         pPrint(r, newBuild, padding + "│  ", pointerForRight)
       }
-      case Leaf(cur) => println(cur)
+      case Leaf(cur) =>
     }
 
  */

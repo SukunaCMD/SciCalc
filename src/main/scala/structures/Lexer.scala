@@ -72,7 +72,6 @@ class Lexer {
       case _ => parens
     }
     val finishedP = loop("", tokens, false, 0, 0)
-    println(finishedP)
     finishedP
   }
 

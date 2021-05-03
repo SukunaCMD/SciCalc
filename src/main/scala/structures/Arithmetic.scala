@@ -1,6 +1,6 @@
 package structures
 
-class Arithmetic {
+object Arithmetic {
 
 
   def add(a: Expr, b: Expr): Double = {
@@ -13,6 +13,8 @@ class Arithmetic {
   def subtract(a: Expr, b: Expr): Double = {
     (a, b) match {
       case (Literal(x), Literal(y)) => x.toDouble-y.toDouble
+      case (Zero, Literal(y)) => 0-y.toDouble
+      case (Literal(x), Zero) => x.toDouble
       case _ => 0.0
     }
   }
