@@ -2,9 +2,8 @@ package structures
 
 object UnitTester {
 
-  def arrayedSamples: Array[String] = {
-    Array("5/4*2+3-3", "5/4*2-3-3", "5/4*2-3*3+3", "2+5+4/5", "5/4/3+2/5")
-  }
+  def arrayedSamples: Array[String] =
+    Array("2-5*75/5/2")
 
   def lexerTests: Unit = {
     val sample1 = "5/4*2+3-3"
@@ -32,11 +31,11 @@ object UnitTester {
 
   }
 
-  def testParser: Unit = {
-    val sampleText = "2+5*2+4*5-5-5"
+  def testParser(text: String): Unit = {
+
     val parser = new Parser
     val lexer = new Lexer
-    val lexed = lexer.lex(sampleText)
+    val lexed = lexer.lex(text)
     val test = parser.parse(lexed)
 
 
@@ -73,8 +72,7 @@ object UnitTester {
     val lexed = lexer.lex(text)
     val test = parser.parse(lexed)
 
-    val added = Evaluator.eval(test)
-    println(test)
+    val added = Evaluator.evaluate(test)
     println(s"$added added")
 
   }
@@ -85,8 +83,10 @@ object Main {
     val samples = UnitTester.arrayedSamples
 
     for( i <- 0 to samples.size-1) {
+      UnitTester.testParser(samples(i))
       UnitTester.testPrinter(samples(i))
       UnitTester.testEvaluator(samples(i))
+
     }
   }
 }

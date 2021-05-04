@@ -37,7 +37,17 @@ class Lexer {
     lex2(parenthesize(firstPass))
   }
 
+  def improvedParenthesize(tokens: List[Lexed]): String = {
+
+    def loop(l: List[Lexed]): String = {
+      l match {
+        case h1 :: h2 :: tail if  =>
+      }
+    }
+  }
+
   def parenthesize(tokens: List[Lexed]): String = {
+    println(tokens)
     @tailrec
     def loop(parens: String, l: List[Lexed], pFound: Boolean, prevParen: Int, lastR1Pos: Int): String = l match {
       case h :: Nil => {
@@ -72,6 +82,7 @@ class Lexer {
       case _ => parens
     }
     val finishedP = loop("", tokens, false, 0, 0)
+    println(finishedP)
     finishedP
   }
 
@@ -123,6 +134,13 @@ class Lexer {
     else if(c=='-') true
     false
   }
+
+  def isR1(c: Char): Boolean = {
+    if(c=='*') true
+    else if(c=='/') true
+    false
+  }
+
 
   def isOperator(c: Char): Boolean = {
     if(c=='+') true

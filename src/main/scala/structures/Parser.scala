@@ -4,6 +4,7 @@ class Parser {
 
   type Lexed = (String, Token)
 
+  // 2-5*75/5/2
   def parse(tokens: List[Lexed]): Expr = {
     def loop(l: List[Lexed]): Expr = l match {
       case op :: paren :: tail if ( isR2Op(op) && isParenthesis(paren)) => {
@@ -19,11 +20,18 @@ class Parser {
         val excludedInner = excludeInners(p :: tail)
         BinOp(op._1, gatherInnerExpr(excludeOuters(l)), loop(excludedInner))
       }
-
-      case h1  :: h2 :: Nil => BinOp(h1._1, Zero, Literal(h2._1))
+      case h1  :: h2 :: Nil => {
+        if(h1._1=="+") {
+          return Literal(h2._1)
+        }
+        Literal("-"+h2._1)
+      }
       case last :: Nil => Literal(last._1)
       case op :: num :: tail if isR2Op(op) => {
         BinOp(op._1, Literal(num._1), loop(tail))
+      }
+      case num :: op :: num2 :: tail if ( isR2Op(op) && num2._1.forall(Character.isDigit) ) => {
+        BinOp("+", BinOp(op._1, Literal(num._1), Literal(num2._1)), loop(tail))
       }
       case num :: op :: tail => {
         BinOp(op._1, Literal(num._1), loop(tail))
