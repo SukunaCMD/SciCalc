@@ -37,14 +37,6 @@ class Lexer {
     lex2(parenthesize(firstPass))
   }
 
-  def improvedParenthesize(tokens: List[Lexed]): String = {
-
-    def loop(l: List[Lexed]): String = {
-      l match {
-        case h1 :: h2 :: tail if  =>
-      }
-    }
-  }
 
   def parenthesize(tokens: List[Lexed]): String = {
     println(tokens)
@@ -129,10 +121,10 @@ class Lexer {
     case _ => "ERROR"
   }
 
-  def isR2(c: Char): Boolean = {
-    if(c=='+') true
-    else if(c=='-') true
-    false
+  def isR2(c: Char): Boolean = c match {
+    case '+' => true
+    case '-' => true
+    case _ => false
   }
 
   def isR1(c: Char): Boolean = {
@@ -149,6 +141,52 @@ class Lexer {
     else if(c=='*') true
     else false
   }
+
+
+  def buildParens(chars: String, start: Int): String = {
+    var newChars = chars
+    var ctr = 0
+
+    for(i <- start to lastPIndex(chars, start)-3 by 2) {
+      val cur = chars(i)
+      val next = chars(i+1)
+      // 5*4*3+4 | (5*4*3+4
+      // 5*4*3+4 | (5
+      newChars = newChars.patch(0, "(", 0)
+      ctr+=1
+      newChars = newChars.patch(nextCloseParen(newChars, i+1+ctr), ")", 0)
+    }
+    newChars
+  }
+
+  def nextCloseParen(chars: String, start: Int): Int = {
+
+    for(i <- start to chars.size-1) {
+      val cur = chars(i)
+      if(cur.isDigit) {
+
+        for(j <- i to chars.size-1) {
+          val next = chars(j)
+          if(!next.isDigit) {
+            return j
+          }
+        }
+      }
+    }
+    chars.size-1
+  }
+
+  def lastPIndex(chars: String, start: Int): Int = {
+    for(i <- start to chars.size-1) {
+      val cur = chars(i)
+
+      if(cur=='+') {
+        i
+      }
+    }
+    chars.size-1
+  }
+
 
   def lastIntIndex(first: Int, chars: String): Int = {
     val size = chars.length

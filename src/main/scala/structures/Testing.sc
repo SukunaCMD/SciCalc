@@ -1,9 +1,28 @@
 import structures.{Lexer, Parser}
 
 val lexer = new Lexer
-val parser = new Parser
-val sampleExpr = "5*4*2+3"
-val lexed = lexer.lex(sampleExpr)
+val sampleExpr = "4+35*4*2+3"
+
+
+
+
+
+
+
+lexer.buildParens(sampleExpr, 4)
+
+lexer.nextCloseParen(sampleExpr, 0)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

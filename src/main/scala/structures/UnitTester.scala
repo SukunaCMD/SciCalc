@@ -1,5 +1,7 @@
 package structures
 
+import structures.UnitTester.testWhileCoding
+
 object UnitTester {
 
   def arrayedSamples: Array[String] =
@@ -76,6 +78,17 @@ object UnitTester {
     println(s"$added added")
 
   }
+
+  def testParenthesize(text: String): Unit = {
+    val lexer = new Lexer
+    lexer.buildParens(text, 0)
+    println(lexer.buildParens(text, 0))
+  }
+
+  def testWhileCoding: Unit = {
+    val lexer = new Lexer
+    println(lexer.isR2('+'))
+  }
 }
 object Main {
 
@@ -83,10 +96,9 @@ object Main {
     val samples = UnitTester.arrayedSamples
 
     for( i <- 0 to samples.size-1) {
-      UnitTester.testParser(samples(i))
-      UnitTester.testPrinter(samples(i))
-      UnitTester.testEvaluator(samples(i))
-
+      UnitTester.testParenthesize(samples(i))
     }
+
   }
+
 }
